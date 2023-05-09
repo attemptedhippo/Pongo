@@ -3,8 +3,8 @@
 
 Ball::Ball() :
 	rect{GetScreenWidth()/2, GetScreenHeight()/2, 20, 20},
-	x_velocity{8}, //Magic number!
-	y_velocity{8}
+	x_velocity{5}, //Magic number!
+	y_velocity{5}
 
 {
 
@@ -17,6 +17,11 @@ void Ball::update()
 
 	rect.x += x_velocity;
 	rect.y += y_velocity;
+}
+
+void Ball::draw()
+{
+	DrawRectangle(rect.x, rect.y, rect.width, rect.height, RED);
 }
 
 void Ball::collided(bool horizontal, bool vertical)

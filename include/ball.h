@@ -7,6 +7,7 @@ class Ball
 public:
 	Ball();
 	void update();
+	void draw();
 	void collided(bool horizontal, bool vertical);
 	
 	Rectangle getRect() const;

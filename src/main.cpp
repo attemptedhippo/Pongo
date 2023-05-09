@@ -33,8 +33,8 @@ int main()
 
 		BeginDrawing();
 		ClearBackground(DARKGRAY);
-		DrawRectangle(mainBall.getRect().x , mainBall.getRect().y , mainBall.getRect().width , mainBall.getRect().height , RED);
-		DrawRectangle(playerPaddle.getRect().x, playerPaddle.getRect().y, playerPaddle.getRect().width, playerPaddle.getRect().height , RAYWHITE);
+		mainBall.draw();
+		playerPaddle.draw();
 		EndDrawing();
 	}
 
