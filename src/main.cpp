@@ -24,7 +24,10 @@ int main()
 				//Do nothing, this is a placeholder for other key events.
 				break;
 		}
-		
+		if(CheckCollisionRecs(mainBall.getRect(), playerPaddle.getRect()))
+		{
+			mainBall.collided(true, true);
+		}
 		GetCollisionRec(mainBall.getRect(), playerPaddle.getRect());
 		mainBall.update();
 
