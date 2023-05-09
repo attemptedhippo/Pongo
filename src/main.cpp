@@ -8,11 +8,13 @@ int main()
 	InitWindow(screenWidth, screenHeight, "Game");
 	SetTargetFPS(60);
 
+	Paddle playerPaddle(screenWidth/2 - 25, screenHeight/2 - 10, 50, 10);
+
 	while (!WindowShouldClose())
 	{
 		BeginDrawing();
 		ClearBackground(DARKGRAY);
-		DrawRectangle(175, 690, 50, 20, RAYWHITE);
+		DrawRectangle(playerPaddle.getX(), playerPaddle.getY(), playerPaddle.getW(), playerPaddle.getH(), RAYWHITE);
 		EndDrawing();
 	}
 
