@@ -6,14 +6,8 @@ class Paddle
 {
 public:
 	Paddle(int _x, int _y, int _w, int _h);
-	void move(int _x, int _y);
-	int getX();
-	int getY();
-	int getW();
-	int getH();
+	void move(int _x);
+	Rectangle getRect() const;
 private:
-	int x;
-	int y;
-	int w;
-	int h;
+	Rectangle rect;
 };

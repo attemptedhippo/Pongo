@@ -1,4 +1,6 @@
 #include "raylib.h"
+
+#include "ball.h"
 #include "paddle.h"
 
 int main()
@@ -8,13 +10,28 @@ int main()
 	InitWindow(screenWidth, screenHeight, "Game");
 	SetTargetFPS(60);
 
-	Paddle playerPaddle(screenWidth/2 - 25, screenHeight/2 - 10, 50, 10);
+	Paddle playerPaddle(screenWidth/2 - 25, screenHeight - 30, 50, 10);
+	Ball mainBall; 
 
 	while (!WindowShouldClose())
 	{
+		if(IsKeyDown(KEY_RIGHT)) playerPaddle.move(8);
+		if(IsKeyDown(KEY_LEFT)) playerPaddle.move(-8);
+
+		switch (GetKeyPressed())
+		{
+			case(KEY_A):
+				//Do nothing, this is a placeholder for other key events.
+				break;
+		}
+		
+		GetCollisionRec(mainBall.getRect(), playerPaddle.getRect());
+		mainBall.update();
+
 		BeginDrawing();
 		ClearBackground(DARKGRAY);
-		DrawRectangle(playerPaddle.getX(), playerPaddle.getY(), playerPaddle.getW(), playerPaddle.getH(), RAYWHITE);
+		DrawRectangle(mainBall.getRect().x , mainBall.getRect().y , mainBall.getRect().width , mainBall.getRect().height , RED);
+		DrawRectangle(playerPaddle.getRect().x, playerPaddle.getRect().y, playerPaddle.getRect().width, playerPaddle.getRect().height , RAYWHITE);
 		EndDrawing();
 	}
 
