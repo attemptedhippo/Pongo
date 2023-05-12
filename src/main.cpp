@@ -1,7 +1,11 @@
+#include <string>
+#include <vector>
+#include <memory>
 #include "raylib.h"
 
 #include "ball.h"
 #include "paddle.h"
+#include "block.h"
 
 int main()
 {
@@ -11,12 +15,24 @@ int main()
 	SetTargetFPS(60);
 
 	Paddle playerPaddle(screenWidth/2 - 25, screenHeight - 30, 50, 10);
-	Ball mainBall; 
+	Ball mainBall;
+
+	std::vector<std::unique_ptr<Block>> blocks;
+	int blockWidth = 50;
+	int blockHeight = 30;
+	std::string Log;
+	for(int i = 0; i < 10; i++)
+	{
+		Log.append(TextFormat("%i ", i + 3 * i));
+		blocks.push_back(std::make_unique<Block>((i * blockWidth) + 3 * i, 50, blockWidth, blockHeight));
+	}
 
 	while (!WindowShouldClose())
 	{
-		if(IsKeyDown(KEY_RIGHT)) playerPaddle.move(8);
-		if(IsKeyDown(KEY_LEFT)) playerPaddle.move(-8);
+		float deltaTime = GetFrameTime();
+
+		if(IsKeyDown(KEY_RIGHT)) playerPaddle.move(200 * deltaTime);
+		if(IsKeyDown(KEY_LEFT)) playerPaddle.move(-200 * deltaTime);
 
 		switch (GetKeyPressed())
 		{
@@ -24,17 +40,19 @@ int main()
 				//Do nothing, this is a placeholder for other key events.
 				break;
 		}
-		if(CheckCollisionRecs(mainBall.getRect(), playerPaddle.getRect()))
-		{
-			mainBall.collided(true, true);
-		}
-		GetCollisionRec(mainBall.getRect(), playerPaddle.getRect());
-		mainBall.update();
+		
+		mainBall.checkCollision(playerPaddle);
+		mainBall.update(deltaTime);
 
 		BeginDrawing();
 		ClearBackground(DARKGRAY);
+		DrawText(Log.c_str(), 3, 3, 15, BLACK);
 		mainBall.draw();
 		playerPaddle.draw();
+		for(auto & element : blocks)
+		{
+			element->draw();
+		}
 		EndDrawing();
 	}
 

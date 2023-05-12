@@ -13,7 +13,7 @@ Rectangle Block::getRect()
 	return rect;
 }
 
-void Block::update()
+void Block::update(float delta)
 {
 	//do update
 }

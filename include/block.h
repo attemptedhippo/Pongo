@@ -6,7 +6,7 @@ class Block
 {
 public:
 	Block(int _x, int _y, int _w, int _h);
-	void update();
+	void update(float delta);
 	void draw();
 	void collided();
 	void destroy();
