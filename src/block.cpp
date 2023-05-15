@@ -26,11 +26,12 @@ void Block::draw()
 void Block::collided()
 {
 	destroyed = true;
-	destroy();
 }
 
-void Block::destroy()
+//bool Block::getDestroyed(const Block& b) const
+bool Block::getDestroyed()
+
 {
-	//oh no I have died!
+	return destroyed;
 }
 
