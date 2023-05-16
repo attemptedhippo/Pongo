@@ -31,7 +31,7 @@ int main()
 	std::string Log;
 	//Log.append(TextFormat("total width %i: %i  || ", width_of_block_group, leftPadding));
 
-	for(int i = 0; i < 30; i++)
+	for(int i = 0; i < 50; i++)
 	{
 		blocks.push_back(std::make_unique<Block>(leftPadding + (((i % 10) * blockWidth) + (padding * (i % 10))),
 					topPadding + (((i / 10) * blockHeight) + (padding * (i / 10))), blockWidth, blockHeight));
@@ -52,8 +52,30 @@ int main()
 		{
 			if(CheckCollisionRecs(mainBall.getRect(), element->getRect()))
 			{
-				mainBall.collided(true, true);	//TODO: Break down ball.checkCollision into check and do logic.
-												//call do collide logic here.
+				Rectangle rect = GetCollisionRec(mainBall.getRect(), element->getRect());
+				int ballCenterX = mainBall.getRect().x + mainBall.getRect().width / 2;
+				int ballCenterY = mainBall.getRect().y + mainBall.getRect().height / 2;
+				
+				if(ballCenterX >= element->getRect().x && ballCenterX <= element->getRect().x +element->getRect().width)
+				{
+					mainBall.collided(false, true);
+				}
+				else if (ballCenterY >= element->getRect().y && ballCenterY <= element->getRect().y +element->getRect().height)
+				{
+					mainBall.collided(true, false);
+				}
+				else
+				{
+					if(rect.x < ballCenterX)
+					{
+						(rect.width >= rect.height) ? mainBall.collided(false, true) : mainBall.collided(true, false);
+					}
+					else
+					{
+						(rect.width >= rect.height) ? mainBall.collided(false, true) : mainBall.collided(true, false);
+					}
+				}
+
 				element->collided();			//TODO: Implement block break logic.
 				break;
 			}
