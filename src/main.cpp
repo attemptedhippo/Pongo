@@ -72,6 +72,24 @@ int main()
 					}
 					else
 					{
+
+
+
+
+
+
+
+
+						//corner collsion broken from bottom side, check yesterdays progrss video to see bug
+
+
+
+
+
+
+
+
+
 						(rect.width >= rect.height) ? mainBall.collided(false, true) : mainBall.collided(true, false);
 					}
 				}
